@@ -26,13 +26,16 @@ public class RegistroActivity extends AppCompatActivity {
         btn_bienestar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i_bienestar = new Intent(RegistroActivity.this,BienestarActivity.class);
+                RegistroActivity.this.startActivity(i_bienestar);
             }
         });
 
         btn_seguridad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i_seguridad= new Intent(RegistroActivity.this,BienestarActivity.class);
+                RegistroActivity.this.startActivity(i_seguridad);
 
             }
         });
