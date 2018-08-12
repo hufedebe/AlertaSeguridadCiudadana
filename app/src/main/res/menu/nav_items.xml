@@ -7,9 +7,6 @@
         android:icon="@drawable/baseline_person_black_24dp"
         android:title="@string/nav_profile" />
 
-
-
-
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/baseline_home_black_24dp"
@@ -24,6 +21,11 @@
         android:id="@+id/nav_call"
         android:icon="@drawable/baseline_offline_bolt_black_24dp"
         android:title="@string/nav_call" />
+
+    <item
+        android:id="@+id/nav_statistics"
+        android:icon="@drawable/baseline_bar_chart_black_24dp"
+        android:title="@string/nav_statistics" />
 
 
 </menu>

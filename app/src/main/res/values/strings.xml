@@ -1,10 +1,26 @@
 <resources>
-    <string name="app_name">Alerta Seguridad Ciudadana</string>
+    <string name="app_name">Seguridad Ciudadana</string>
     <string name="nav_home">Home</string>
     <string name="nav_profile">User</string>
     <string name="nav_message">SMS</string>
     <string name="nav_call">Call</string>
+    <string name="nav_statistics">Estadísticas</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+    <string-array name="incidentes_seguridad">
+        <item>Pandillaje</item>
+        <item>Robo</item>
+        <item>Peleas</item>
+        <item>Acoso Escolar</item>
+        <item>Persona Perdida</item>
+        <item>Violencia Familiar</item>
+        <item>Abuso Sexual</item>
+        <item>Droga</item>
+
+    </string-array>
 </resources>

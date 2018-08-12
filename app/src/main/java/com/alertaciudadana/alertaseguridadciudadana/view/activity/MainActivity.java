@@ -15,6 +15,7 @@ import com.alertaciudadana.alertaseguridadciudadana.view.fragment.CallFragment;
 import com.alertaciudadana.alertaseguridadciudadana.view.fragment.HomeFragment;
 import com.alertaciudadana.alertaseguridadciudadana.view.fragment.MessageFragment;
 import com.alertaciudadana.alertaseguridadciudadana.view.fragment.ProfileFragment;
+import com.alertaciudadana.alertaseguridadciudadana.view.fragment.StatisticsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private CallFragment callFragment;
     private MessageFragment messageFragment;
     private ProfileFragment profileFragment;
+    private StatisticsFragment statisticsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         callFragment = new CallFragment();
         messageFragment = new MessageFragment();
         profileFragment = new ProfileFragment();
+        statisticsFragment = new StatisticsFragment();
 
         setFragment(homeFragment);
 
@@ -63,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_call:
                         setFragment(callFragment);
                         return true;
+
+                    case R.id.nav_statistics:
+                        setFragment(statisticsFragment);
+                        return true;
+
                     default:
                         return false;
 

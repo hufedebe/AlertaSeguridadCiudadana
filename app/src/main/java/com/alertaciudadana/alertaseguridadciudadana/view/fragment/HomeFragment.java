@@ -85,21 +85,34 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getContext());
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-12.113301, -77.020770), 17));
-        LatLng crimen = new LatLng(-12.112212, -77.020196);
-        LatLng basura = new LatLng(-12.113068,  -77.017716);
-        LatLng pandillaje = new LatLng(-12.113293, -77.021076);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-12.113254, -77.023343), 15));
 
 
-        googleMap.addMarker(new MarkerOptions().position(crimen)
-                .title("Crimen"));
 
-        googleMap.addMarker(new MarkerOptions().position(basura)
-                .title("Basura")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-        googleMap.addMarker(new MarkerOptions().position(pandillaje)
-                .title("Pandillaje"));
+        LatLng pandillaje2 = new LatLng(-12.113254, -77.023343);
+        LatLng droga = new LatLng(-12.113480, -77.022936);
+        LatLng robo = new LatLng(-12.112653, -77.018377);
+        LatLng droga2 = new LatLng(-12.111193, -77.023869);
+
+
+
+        googleMap.addMarker(new MarkerOptions().position(pandillaje2)
+                .title("Pandillaje")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pandillaje)));
+
+        googleMap.addMarker(new MarkerOptions().position(droga)
+                .title("Venta de Droga")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_droga)));
+
+        googleMap.addMarker(new MarkerOptions().position(robo)
+                .title("Robo")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_robo_2)));
+
+
+        googleMap.addMarker(new MarkerOptions().position(droga2)
+                .title("Venta de Droga")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_droga)));
 
         //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-12.112304, -77.007116), 10));
     }

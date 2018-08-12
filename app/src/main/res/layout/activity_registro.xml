@@ -4,49 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dialog_border"
     android:orientation="vertical"
     tools:context=".view.activity.RegistroActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/dialog_border"
         android:orientation="vertical">
 
 
         <TextView
             android:layout_marginTop="25dp"
+            android:background="@drawable/dialog_border"
             android:textSize="22dp"
             android:textStyle="bold"
-            android:textColor="#448AFF"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Incidentes"/>
+            android:text="Registro de Incidentes"/>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@drawable/dialog_border"
             android:layout_marginTop="25dp">
 
             <LinearLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:orientation="vertical"
+                android:background="@drawable/dialog_border"
                 android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/btn_bienestar"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
+                    android:tint="#66BB6A"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_border"
                     android:src="@drawable/baseline_group_black_48dp"
                     android:clickable="true"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_border"
                     android:layout_gravity="center_horizontal"
                     android:text="Bienestar"/>
 
@@ -57,6 +65,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:orientation="vertical"
+                android:background="@drawable/dialog_border"
                 android:layout_gravity="center">
 
                 <ImageView
@@ -66,10 +75,13 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_security_black_48dp"
                     android:clickable="true"
+                    android:tint="#D32F2F"
+                    android:background="@drawable/dialog_border"
                     />
                     />
                 <TextView
                     android:layout_width="wrap_content"
+                    android:background="@drawable/dialog_border"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Seguridad"/>
@@ -78,20 +90,21 @@
 
             <Button
                 android:id="@+id/btn_otro"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="2dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/boton_registroincidente"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:background="@drawable/boton_barra"
-                android:text="Otros"
+                android:text="Otro Incidente"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
 
-                />
+                android:textSize="18sp" />
 
 
 
