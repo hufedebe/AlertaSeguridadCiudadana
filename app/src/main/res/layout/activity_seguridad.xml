@@ -1,9 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="500dp"
     tools:context=".view.activity.SeguridadActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#4FC3F7"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="#4FC3F7"
+                android:text="Inicidentes de Seguridad"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/img_acoso"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:background="@drawable/textview_border"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/acoso" />
+
+            <ImageView
+                android:id="@+id/img_extraviado"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/extraviado"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/img_peleas"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/peleas" />
+
+            <ImageView
+                android:id="@+id/img_robo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/robo"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/img_vandalismo"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/vandalismo" />
+
+            <ImageView
+                android:id="@+id/img_venta_droga"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/venta_droga"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/img_violencia_familiar"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/violencia_familiar" />
+
+            <ImageView
+                android:id="@+id/img_otros"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/otros"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>

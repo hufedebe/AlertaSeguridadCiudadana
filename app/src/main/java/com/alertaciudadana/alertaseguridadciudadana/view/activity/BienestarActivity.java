@@ -12,21 +12,67 @@ import com.alertaciudadana.alertaseguridadciudadana.R;
 public class BienestarActivity extends AppCompatActivity {
 
 
-    private ImageView bienestarImage;
+    private ImageView img_accidente,img_basura,img_construccion,img_problemas_viales,img_ruido,img_otros;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienestar);
 
-        bienestarImage = findViewById(R.id.btn_bienestar);
+        img_accidente = findViewById(R.id.img_accidente);
+        img_basura = findViewById(R.id.img_basura);
+        img_construccion = findViewById(R.id.img_construccion);
+        img_problemas_viales = findViewById(R.id.img_problemas_viales);
+        img_ruido = findViewById(R.id.img_ruido);
+        img_otros = findViewById(R.id.img_otros);
 
-        bienestarImage.setOnClickListener(new View.OnClickListener() {
+        img_accidente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
+
+        img_basura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                BienestarActivity.this.startActivity(i_bienestar);
+            }
+        });
+
+        img_construccion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                BienestarActivity.this.startActivity(i_bienestar);
+            }
+        });
+
+        img_problemas_viales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                BienestarActivity.this.startActivity(i_bienestar);
+            }
+        });
+
+        img_ruido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                BienestarActivity.this.startActivity(i_bienestar);
+            }
+        });
+        img_otros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                BienestarActivity.this.startActivity(i_bienestar);
+
+            }
+        });
+
 
     }
 }

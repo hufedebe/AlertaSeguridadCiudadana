@@ -10,29 +10,147 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="40dp">
+    >
 
         <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:orientation="vertical"
-            android:layout_gravity="center">
+            android:gravity="center"
+            android:background="#4FC3F7"
+            android:layout_marginBottom="40dp">
 
-            <ImageView
-                android:id="@+id/btn_bienestar"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_group_black_48dp"
-                android:clickable="true"
-                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Bienestar"/>
+                android:background="#4FC3F7"
+                android:text="Inicidentes de Bienestar"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:id="@+id/img_accidente"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:background="@drawable/textview_border"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/accidente" />
+
+                <ImageView
+                    android:id="@+id/img_basura"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/textview_border"
+                    android:padding="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+
+                    android:clickable="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/basura_publica"
+                    />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/img_construccion"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/construccion" />
+
+            <ImageView
+                android:id="@+id/img_problemas_viales"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/problemas_viales"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/img_ruido"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ruidos" />
+
+            <ImageView
+                android:id="@+id/img_otros"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border"
+                android:padding="5dp"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/otros"
+                />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

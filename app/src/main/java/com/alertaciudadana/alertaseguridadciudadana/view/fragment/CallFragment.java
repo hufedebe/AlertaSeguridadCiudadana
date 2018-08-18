@@ -27,7 +27,7 @@ import com.alertaciudadana.alertaseguridadciudadana.R;
 public class CallFragment extends Fragment {
 
 
-    private ImageView img_bombero, img_policia, img_serenazgo;
+    private ImageView img_ambulancia,img_bombero,img_municipalidad, img_policia,img_serenazgo,img_familia;
 
     public CallFragment() {
         // Required empty public constructor
@@ -45,15 +45,19 @@ public class CallFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        img_ambulancia = view.findViewById(R.id.img_ambulancia);
         img_bombero = view.findViewById(R.id.img_bombero);
+        img_municipalidad = view.findViewById(R.id.img_municipalidad);
         img_policia = view.findViewById(R.id.img_policia);
         img_serenazgo = view.findViewById(R.id.img_serenazgo);
+        img_familia = view.findViewById(R.id.img_familia);
+
 
         img_serenazgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isPermissionGranted()){
-                    call_action();
+                    call_action("014481680");
                 }
 
             }
@@ -64,26 +68,58 @@ public class CallFragment extends Fragment {
             public void onClick(View view) {
 
                     if(isPermissionGranted()){
-                        call_action();
+                        call_action("014481680");
                     }
-
-
 
             }
         });
 
-        img_serenazgo.setOnClickListener(new View.OnClickListener() {
+        img_ambulancia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                    if(isPermissionGranted()){
-                        call_action();
-                    }
-
-
+                if(isPermissionGranted()){
+                    call_action("012610502");
+                }
 
             }
         });
+
+        img_bombero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isPermissionGranted()){
+                    call_action("116");
+                }
+
+            }
+        });
+
+        img_municipalidad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isPermissionGranted()){
+                    call_action("012410413");
+                }
+
+            }
+        });
+
+        img_familia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isPermissionGranted()){
+                    call_action("977245354");
+                }
+
+            }
+        });
+
+
+
 
 
 
@@ -119,7 +155,7 @@ public class CallFragment extends Fragment {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
-                    call_action();
+                    //call_action();
                 } else {
                      //Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
                 }
@@ -132,10 +168,10 @@ public class CallFragment extends Fragment {
     }
 
     @SuppressLint("MissingPermission")
-    public void call_action(){
+    public void call_action(String number){
 
         Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + "977245354"));
+        callIntent.setData(Uri.parse("tel:" + number));
         getActivity().startActivity(callIntent);
     }
 }

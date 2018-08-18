@@ -79,6 +79,32 @@
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <EditText
+                android:id="@+id/date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_date"
+                android:drawablePadding="5dp"
+                android:drawableTint="#FF4081"
+                android:singleLine="true"
+                android:hint="Fecha"
+                android:inputType="date" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
