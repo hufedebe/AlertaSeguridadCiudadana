@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#B3E5FC"
+    tools:context=".view.activity.SesionActivity">
+
+
+
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:clickable="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:src="@drawable/back_sky"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="95dp"
+        android:layout_toEndOf="@+id/back_arrow"
+        android:fontFamily="cursive"
+        android:text="Inicia Sesión:"
+        android:textColor="#03A9F4"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/txt_correo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="200dp"
+        android:text="Corrreo"
+        android:textColor="#03A9F4" />
+
+    <EditText
+        android:id="@+id/editText_correo"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:textSize="12sp"
+        android:paddingStart="10dp"
+        android:hint="Insertar correo"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#9d9d9c"
+        android:textColor="#9d9d9c"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/txt_correo"
+        android:background="@drawable/text_sesion" />
+
+    <TextView
+        android:id="@+id/txt_contrasena"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_correo"
+        android:text="Contraseña"
+        android:layout_marginStart="60dp"
+        android:textColor="#03A9F4" />
+
+    <EditText
+        android:id="@+id/editText_contrasena"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:textSize="12sp"
+        android:paddingStart="10dp"
+        android:inputType="textPassword"
+        android:textColorHint="#9d9d9c"
+        android:textColor="#9d9d9c"
+        android:hint="Insertar Contraseña"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/txt_contrasena"
+        android:background="@drawable/text_sesion" />
+
+
+    <Button
+        android:id="@+id/btn_olvideContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/editText_contrasena"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/boton_sesion"
+        android:text="Olvidé Contraseña"
+        android:textAllCaps="false"
+        android:textColor="#561e19"
+        />
+
+    <Button
+        android:id="@+id/btn_ingresar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/btn_olvideContrasena"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/boton_sesion"
+        android:text="Ingresar"
+        android:textAllCaps="false"
+        android:textColor="#561e19"
+        />
+
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txt_contrasena"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center" />
+
+
+</RelativeLayout>

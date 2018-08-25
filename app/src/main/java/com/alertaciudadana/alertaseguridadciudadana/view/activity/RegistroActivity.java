@@ -44,6 +44,7 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_incidente = new Intent(RegistroActivity.this,IncidenteActivity.class);
+                i_incidente.putExtra("INCIDENTE", "otro");
                 RegistroActivity.this.startActivity(i_incidente);
             }
         });

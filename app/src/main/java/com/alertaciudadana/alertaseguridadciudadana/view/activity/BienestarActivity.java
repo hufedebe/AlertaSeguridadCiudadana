@@ -29,6 +29,7 @@ public class BienestarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                i_bienestar.putExtra("INCIDENTE", "Accidente");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -37,6 +38,7 @@ public class BienestarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                i_bienestar.putExtra("INCIDENTE", "Basura en Vía Pública");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -45,6 +47,7 @@ public class BienestarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                i_bienestar.putExtra("INCIDENTE", "Construcción Ilegal");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -53,6 +56,7 @@ public class BienestarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                i_bienestar.putExtra("INCIDENTE", "Problemas Viales");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -61,6 +65,7 @@ public class BienestarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                i_bienestar.putExtra("INCIDENTE", "Ruidos Molestos");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -68,6 +73,7 @@ public class BienestarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
+                i_bienestar.putExtra("INCIDENTE", "otro");
                 BienestarActivity.this.startActivity(i_bienestar);
 
             }

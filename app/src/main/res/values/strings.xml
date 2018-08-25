@@ -10,8 +10,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
-
     <string-array name="incidentes_seguridad">
         <item>Pandillaje</item>
         <item>Robo</item>

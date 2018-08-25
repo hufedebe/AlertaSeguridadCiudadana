@@ -30,6 +30,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Acoso");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -38,6 +39,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Extraviado");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -46,6 +48,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Peleas");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -55,6 +58,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Robo");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -63,6 +67,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Vandalismo");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -71,6 +76,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Venta Drogas");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -79,6 +85,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "Violencia Familiar");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -87,6 +94,7 @@ public class SeguridadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
+                i_seguridad.putExtra("INCIDENTE", "otro");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });

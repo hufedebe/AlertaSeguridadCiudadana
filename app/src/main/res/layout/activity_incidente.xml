@@ -20,6 +20,7 @@
             >
 
             <EditText
+                android:id="@+id/editText_Incidente"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_report_problem"
