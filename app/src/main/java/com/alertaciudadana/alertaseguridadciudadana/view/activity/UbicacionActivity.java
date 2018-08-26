@@ -28,6 +28,9 @@ public class UbicacionActivity extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubicacion);
 
+        final String incidente= getIntent().getStringExtra("INCIDENTE");
+
+
             mcontext= getApplicationContext();
         btn_seguir = findViewById(R.id.btn_hecho);
 
@@ -39,6 +42,7 @@ public class UbicacionActivity extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onClick(View view) {
                 Intent i_registro = new Intent(UbicacionActivity.this,IncidenteActivity.class);
+                i_registro.putExtra("INCIDENTE", incidente.toString());
                 startActivity(i_registro);
             }
         });

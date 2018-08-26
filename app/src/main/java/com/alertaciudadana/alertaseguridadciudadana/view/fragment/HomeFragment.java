@@ -103,11 +103,55 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             mMapView.getMapAsync(this);
         }
 
+
+
+        //Obtener botones
+        btn_registrar= getView().findViewById(R.id.btn_registrar);
+
+
+
+
+
+        btn_registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Test","Entrando");
+                Intent iRegistro = new Intent(getActivity(), RegistroActivity.class);
+                startActivity(iRegistro);
+            }
+        });
+
+
+
+
+
+    }
+
+
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+        mGoogleMap = googleMap;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-12.113254, -77.023343), 15));
+
+
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-               // Toast.makeText(getActivity(), location.toString(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), location.toString(), Toast.LENGTH_SHORT).show();
+                mGoogleMap.clear();
+                LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+                mGoogleMap.addMarker(new MarkerOptions().position(userLocation)
+                        .title("Alerta")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,17));
+
+
+
             }
 
             @Override
@@ -138,42 +182,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
             }
         }
-
-        //Obtener botones
-        btn_registrar= getView().findViewById(R.id.btn_registrar);
-
-
-
-
-
-        btn_registrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Test","Entrando");
-                Intent iRegistro = new Intent(getActivity(), RegistroActivity.class);
-                startActivity(iRegistro);
-            }
-        });
-
-
-
-
-
-    }
-
-
-
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        MapsInitializer.initialize(getContext());
-        mGoogleMap = googleMap;
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-12.113254, -77.023343), 15));
-
-
-
 
         LatLng pandillaje2 = new LatLng(-12.113254, -77.023343);
         LatLng droga = new LatLng(-12.113480, -77.022936);

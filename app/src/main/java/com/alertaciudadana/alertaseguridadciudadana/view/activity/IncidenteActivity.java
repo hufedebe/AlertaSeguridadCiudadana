@@ -48,7 +48,7 @@ public class IncidenteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incidente);
-        String incidente= getIntent().getStringExtra("INCIDENTE");
+        final String incidente= getIntent().getStringExtra("INCIDENTE");
 
         TextWatcher tw = new TextWatcher() {
             private String current = "";
@@ -136,6 +136,7 @@ public class IncidenteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i_ubicacion = new Intent(IncidenteActivity.this,UbicacionActivity.class);
+                i_ubicacion.putExtra("INCIDENTE", incidente.toString());
                 startActivity(i_ubicacion);
 
             }

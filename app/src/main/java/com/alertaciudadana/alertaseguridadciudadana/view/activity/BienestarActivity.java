@@ -18,12 +18,15 @@ public class BienestarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienestar);
 
+
         img_accidente = findViewById(R.id.img_accidente);
         img_basura = findViewById(R.id.img_basura);
         img_construccion = findViewById(R.id.img_construccion);
         img_problemas_viales = findViewById(R.id.img_problemas_viales);
         img_ruido = findViewById(R.id.img_ruido);
         img_otros = findViewById(R.id.img_otros);
+
+
 
         img_accidente.setOnClickListener(new View.OnClickListener() {
             @Override
