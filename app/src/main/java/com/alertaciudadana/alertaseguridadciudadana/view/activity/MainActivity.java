@@ -1,12 +1,16 @@
 package com.alertaciudadana.alertaseguridadciudadana.view.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -16,6 +20,10 @@ import com.alertaciudadana.alertaseguridadciudadana.view.fragment.HomeFragment;
 import com.alertaciudadana.alertaseguridadciudadana.view.fragment.MessageFragment;
 import com.alertaciudadana.alertaseguridadciudadana.view.fragment.ProfileFragment;
 import com.alertaciudadana.alertaseguridadciudadana.view.fragment.StatisticsFragment;
+import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +36,20 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
     private StatisticsFragment statisticsFragment;
 
+    LocationManager locationManager;
+    LocationListener locationListener;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                }
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,4 +111,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+
 }

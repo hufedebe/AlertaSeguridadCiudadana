@@ -33,6 +33,7 @@ public class BienestarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 i_bienestar.putExtra("INCIDENTE", "Accidente");
+                i_bienestar.putExtra("TIPO","B");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -42,6 +43,7 @@ public class BienestarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 i_bienestar.putExtra("INCIDENTE", "Basura en Vía Pública");
+                i_bienestar.putExtra("TIPO","B");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -51,6 +53,7 @@ public class BienestarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 i_bienestar.putExtra("INCIDENTE", "Construcción Ilegal");
+                i_bienestar.putExtra("TIPO","B");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -60,6 +63,7 @@ public class BienestarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 i_bienestar.putExtra("INCIDENTE", "Problemas Viales");
+                i_bienestar.putExtra("TIPO","B");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -69,6 +73,7 @@ public class BienestarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 i_bienestar.putExtra("INCIDENTE", "Ruidos Molestos");
+                i_bienestar.putExtra("TIPO","B");
                 BienestarActivity.this.startActivity(i_bienestar);
             }
         });
@@ -77,6 +82,7 @@ public class BienestarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_bienestar = new Intent(BienestarActivity.this,IncidenteActivity.class);
                 i_bienestar.putExtra("INCIDENTE", "otro");
+                i_bienestar.putExtra("TIPO","O");
                 BienestarActivity.this.startActivity(i_bienestar);
 
             }

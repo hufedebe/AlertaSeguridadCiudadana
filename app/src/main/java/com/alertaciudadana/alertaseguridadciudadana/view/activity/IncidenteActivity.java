@@ -1,5 +1,6 @@
 package com.alertaciudadana.alertaseguridadciudadana.view.activity;
 
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,31 +10,36 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alertaciudadana.alertaseguridadciudadana.R;
+import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 
-public class IncidenteActivity extends AppCompatActivity {
+public class IncidenteActivity extends AppCompatActivity  {
 
     ImageButton btn_ubicacion, btn_camera;
     Button btn_registrar;
-    EditText date;
+
 
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
@@ -42,13 +48,45 @@ public class IncidenteActivity extends AppCompatActivity {
     ImageView img_logo;
     String selectedImagePath;
     EditText editText_Incidente;
+    EditText editText_Descripcion;
+    EditText editText_Numero;
+    EditText editText_Correo;
+    EditText date;
+    EditText editText_Hora;
+    TextView txt_time;
+
+
+
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+
+
+    private static final String CERO = "0";
+    private static final String DOS_PUNTOS = ":";
+
+    //Calendario para obtener fecha & hora
+    public final Calendar c = Calendar.getInstance();
+    final int hora = c.get(Calendar.HOUR_OF_DAY);
+    final int minuto = c.get(Calendar.MINUTE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incidente);
         final String incidente= getIntent().getStringExtra("INCIDENTE");
+        final String latitud  = getIntent().getStringExtra("LATITUD");
+        final String longitud = getIntent().getStringExtra("LONGITUD");
+        final String tipo = getIntent().getStringExtra("TIPO");
+
+
+        //DATOS DE LA PANTALLA
+        final String descripcion= getIntent().getStringExtra("DESCRIPCION");
+        final String numero= getIntent().getStringExtra("NUMERO");
+        final String correo= getIntent().getStringExtra("CORREO");
+        final String fecha= getIntent().getStringExtra("FECHA");
+        final String hora= getIntent().getStringExtra("HORA");
+
+
 
         TextWatcher tw = new TextWatcher() {
             private String current = "";
@@ -116,6 +154,25 @@ public class IncidenteActivity extends AppCompatActivity {
         btn_camera = findViewById(R.id.btn_camara);
         btn_registrar = findViewById(R.id.btn_registrar);
         editText_Incidente=findViewById(R.id.editText_Incidente);
+        editText_Descripcion=findViewById(R.id.editText_Descripcion);
+        editText_Incidente=findViewById(R.id.editText_Incidente);
+        editText_Numero=findViewById(R.id.editText_Numero);
+        editText_Correo=findViewById(R.id.editText_Correo);
+        editText_Hora=findViewById(R.id.editText_Hora);
+        date = findViewById(R.id.date);
+        date.addTextChangedListener(tw);
+        txt_time= findViewById(R.id.txt_time);
+
+        txt_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                obtenerHora();
+
+            }
+        });
+
+
+
 
         if(incidente.equals("otro")){
 
@@ -124,10 +181,34 @@ public class IncidenteActivity extends AppCompatActivity {
             editText_Incidente.setInputType(0);
         }
 
+        if(tipo.equals("A")){
+            btn_ubicacion.setVisibility(View.GONE);
+        }
 
 
-        date = findViewById(R.id.date);
-        date.addTextChangedListener(tw);
+
+        if(descripcion!=null){
+            editText_Descripcion.setText(descripcion);
+
+        }
+        if(numero!=null){
+            editText_Numero.setText(numero);
+        }
+
+        if(correo!=null){
+            editText_Correo.setText(correo);
+        }
+
+        if(fecha!=null){
+            date.setText(fecha);
+        }
+        if(hora !=null){
+            txt_time.setText(hora);
+        }
+
+
+
+
 
 
 
@@ -137,6 +218,14 @@ public class IncidenteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_ubicacion = new Intent(IncidenteActivity.this,UbicacionActivity.class);
                 i_ubicacion.putExtra("INCIDENTE", incidente.toString());
+                i_ubicacion.putExtra("TIPO",tipo);
+                i_ubicacion.putExtra("DESCRIPCION",editText_Descripcion.getText().toString());
+                i_ubicacion.putExtra("NUMERO",editText_Numero.getText().toString());
+                i_ubicacion.putExtra("CORREO",editText_Correo.getText().toString());
+                i_ubicacion.putExtra("FECHA",date.getText().toString());
+                i_ubicacion.putExtra("HORA",txt_time.getText().toString());
+
+
                 startActivity(i_ubicacion);
 
             }
@@ -158,11 +247,89 @@ public class IncidenteActivity extends AppCompatActivity {
         btn_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int index =  LoginActivity.listIncidentes.size()+1;
+                IncidenteModel incidenteModel = new IncidenteModel();
+                incidenteModel.setId(Integer.toString(index));
+                incidenteModel.setSubtipo(editText_Incidente.getText().toString());
+                incidenteModel.setDescripcion(editText_Descripcion.getText().toString());
+                incidenteModel.setNumero(editText_Numero.getText().toString());
+                incidenteModel.setCorreo(editText_Numero.getText().toString());
+                incidenteModel.setFecha(date.getText().toString());
+                incidenteModel.setHora(txt_time.getText().toString());
+                if(tipo.equals("A")){
+                    incidenteModel.setLatitude(latitud);
+                    incidenteModel.setLongitud(longitud);
+                }else{
+                    incidenteModel.setLatitude(latitud);
+                    incidenteModel.setLongitud(longitud);
+                }
+
+                incidenteModel.setTipo(tipo);
+                LoginActivity.listIncidentes.add(incidenteModel);
+                Log.d("Hugo", String.valueOf(LoginActivity.listIncidentes.size()));
+                Log.d("Hugo", String.valueOf(incidenteModel.getLatitude()));
+                Log.d("Hugo", String.valueOf(incidenteModel.getLongitud()));
                 Intent i_principal = new Intent(IncidenteActivity.this,MainActivity.class);
                 startActivity(i_principal);
             }
         });
     }
+
+    private void obtenerHora() {
+
+        TimePickerDialog recogerHora = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                //Formateo el hora obtenido: antepone el 0 si son menores de 10
+                String horaFormateada =  (hourOfDay < 10)? String.valueOf(CERO + hourOfDay) : String.valueOf(hourOfDay);
+                //Formateo el minuto obtenido: antepone el 0 si son menores de 10
+                String minutoFormateado = (minute < 10)? String.valueOf(CERO + minute):String.valueOf(minute);
+                //Obtengo el valor a.m. o p.m., dependiendo de la selección del usuario
+                String AM_PM;
+                if(hourOfDay < 12) {
+                    AM_PM = "a.m.";
+                } else {
+                    AM_PM = "p.m.";
+                }
+                //Muestro la hora con el formato deseado
+                txt_time.setText(horaFormateada + DOS_PUNTOS + minutoFormateado + " " + AM_PM);
+            }
+            //Estos valores deben ir en ese orden
+            //Al colocar en false se muestra en formato 12 horas y true en formato 24 horas
+            //Pero el sistema devuelve la hora en formato 24 horas
+        }, hora, minuto, false);
+
+        recogerHora.show();
+
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+        outState.putString("DESCRIPCION",editText_Descripcion.getText().toString());
+        outState.putString("NUMERO",editText_Hora.getText().toString());
+        outState.putString("CORREO",editText_Correo.getText().toString());
+        outState.putString("FECHA",date.getText().toString());
+        outState.putString("HORA",editText_Hora.getText().toString());
+
+        outPersistentState.putString("DESCRIPCION",editText_Descripcion.getText().toString());
+        outPersistentState.putString("NUMERO",editText_Hora.getText().toString());
+        outPersistentState.putString("CORREO",editText_Correo.getText().toString());
+        outPersistentState.putString("FECHA",date.getText().toString());
+        outPersistentState.putString("HORA",txt_time.getText().toString());
+
+
+
+        super.onSaveInstanceState(outState, outPersistentState);
+
+
+
+
+    }
+
+
 
 
     private void startDialog() {

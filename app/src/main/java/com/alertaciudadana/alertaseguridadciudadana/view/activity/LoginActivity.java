@@ -7,16 +7,21 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alertaciudadana.alertaseguridadciudadana.R;
+import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button btn_login;
+    public static List<IncidenteModel> listIncidentes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        listIncidentes = new ArrayList<>();
         btn_login = findViewById(R.id.btn_login);
 
 

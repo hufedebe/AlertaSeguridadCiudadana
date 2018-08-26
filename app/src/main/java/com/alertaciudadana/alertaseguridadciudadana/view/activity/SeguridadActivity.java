@@ -31,6 +31,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Acoso");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -40,6 +41,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Extraviado");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -49,6 +51,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Peleas");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -59,6 +62,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Robo");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -68,6 +72,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Vandalismo");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -77,6 +82,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Venta Drogas");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -86,6 +92,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "Violencia Familiar");
+                i_seguridad.putExtra("TIPO","S");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
@@ -95,6 +102,7 @@ public class SeguridadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i_seguridad = new Intent(SeguridadActivity.this,IncidenteActivity.class);
                 i_seguridad.putExtra("INCIDENTE", "otro");
+                i_seguridad.putExtra("TIPO","O");
                 SeguridadActivity.this.startActivity(i_seguridad);
             }
         });
