@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    tools:context=".view.activity.PrincipalActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="50dp"
+                >
+
+                <Button
+                    android:id="@+id/btn_alertaRapida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/boton_alerta"
+                    android:text="Alerta Rapida"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:id="@+id/img_mapacrimen"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:padding="5dp"
+                        android:background="@drawable/textview_border"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/mapa_crimen" />
+
+                    <ImageView
+                        android:id="@+id/img_marcacion"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/textview_border"
+                        android:padding="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/marcacion_rapida"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <TextView
+                        android:text="Mapa del Crimen"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        />
+
+                    <TextView
+                        android:text="Marcación Rápida"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:id="@+id/img_chat"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:background="@drawable/textview_border"
+                        android:padding="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/chat" />
+
+                    <ImageView
+                        android:id="@+id/img_reporte"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:background="@drawable/textview_border"
+                        android:padding="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/reportes"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <TextView
+                        android:text="Chat"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        />
+
+                    <TextView
+                        android:text="Reportes"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:id="@+id/img_perfil"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/textview_border"
+                        android:padding="5dp"
+                        android:clickable="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/datos_usuario" />
+
+                    <ImageView
+                        android:id="@+id/img_alerta"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/textview_border"
+                        android:padding="5dp"
+                        android:clickable="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/alertas"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <TextView
+                        android:text="Perfil"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        />
+
+                    <TextView
+                        android:text="Mis Alertas"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+
+
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class IncidenteActivity extends AppCompatActivity  {
@@ -54,6 +56,7 @@ public class IncidenteActivity extends AppCompatActivity  {
     EditText date;
     EditText editText_Hora;
     TextView txt_time;
+    LinearLayout layout_correo, layout_numero;
 
 
 
@@ -66,8 +69,13 @@ public class IncidenteActivity extends AppCompatActivity  {
 
     //Calendario para obtener fecha & hora
     public final Calendar c = Calendar.getInstance();
-    final int hora = c.get(Calendar.HOUR_OF_DAY);
-    final int minuto = c.get(Calendar.MINUTE);
+
+
+    SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy ");
+    String strDate = "Current Date : " + mdformat.format(c.getTime());
+
+    final Integer hora_calendario = c.get(Calendar.HOUR_OF_DAY);
+    final Integer minuto_calendario = c.get(Calendar.MINUTE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +170,9 @@ public class IncidenteActivity extends AppCompatActivity  {
         date = findViewById(R.id.date);
         date.addTextChangedListener(tw);
         txt_time= findViewById(R.id.txt_time);
+        layout_correo = findViewById(R.id.layout_correo);
+        layout_numero = findViewById(R.id.layout_numero);
+
 
         txt_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +194,14 @@ public class IncidenteActivity extends AppCompatActivity  {
 
         if(tipo.equals("A")){
             btn_ubicacion.setVisibility(View.GONE);
+            editText_Correo.setVisibility(View.GONE);
+            layout_correo.setVisibility(View.GONE);
+            editText_Numero.setVisibility(View.GONE);
+            layout_numero.setVisibility(View.GONE);
+            editText_Incidente.setText("ALERTA RÁPIDA");
+            editText_Incidente.setInputType(0);
+            txt_time.setText(hora_calendario.toString()+ DOS_PUNTOS + minuto_calendario.toString() );
+            date.setText(strDate);
         }
 
 
@@ -298,7 +317,7 @@ public class IncidenteActivity extends AppCompatActivity  {
             //Estos valores deben ir en ese orden
             //Al colocar en false se muestra en formato 12 horas y true en formato 24 horas
             //Pero el sistema devuelve la hora en formato 24 horas
-        }, hora, minuto, false);
+        }, hora_calendario, minuto_calendario, false);
 
         recogerHora.show();
 

@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        final Integer fragmentId = getIntent().getIntExtra("fragment",0);
+        Log.i("Hugo",fragmentId.toString());
 
         mMainFrame = findViewById(R.id.main_frame);
         mMainNav = findViewById(R.id.main_nav);
@@ -65,7 +67,28 @@ public class MainActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
         statisticsFragment = new StatisticsFragment();
 
-        setFragment(homeFragment);
+        if(fragmentId==1){
+            setFragment(homeFragment);
+            mMainNav.setSelectedItemId(R.id.nav_home);
+        }else if(fragmentId==2){
+            setFragment(callFragment);
+            mMainNav.setSelectedItemId(R.id.nav_call);
+        }else if(fragmentId==3){
+            setFragment(messageFragment);
+            mMainNav.setSelectedItemId(R.id.nav_sms);
+        }else if(fragmentId==4){
+            setFragment(statisticsFragment);
+            mMainNav.setSelectedItemId(R.id.nav_statistics);
+        }else if(fragmentId==5){
+            setFragment(profileFragment);
+            mMainNav.setSelectedItemId(R.id.nav_user);
+        }else{
+            setFragment(homeFragment);
+            mMainNav.setSelectedItemId(R.id.nav_home);
+        }
+
+
+       // setFragment(homeFragment);
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -101,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        mMainNav.setSelectedItemId(R.id.nav_home);
+
     }
 
     private void setFragment(Fragment fragment) {

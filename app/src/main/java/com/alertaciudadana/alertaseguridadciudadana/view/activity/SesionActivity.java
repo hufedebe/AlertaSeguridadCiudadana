@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.alertaciudadana.alertaseguridadciudadana.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class SesionActivity extends AppCompatActivity {
 
     Button btn_ingresar;
+
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -44,6 +46,8 @@ public class SesionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sesion);
+
+
 
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -89,9 +93,14 @@ public class SesionActivity extends AppCompatActivity {
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i_home = new Intent(SesionActivity.this,MainActivity.class);
+                Intent i_home = new Intent(SesionActivity.this,PrincipalActivity.class);
                 startActivity(i_home);
             }
         });
+
+
+
+
+
     }
 }
