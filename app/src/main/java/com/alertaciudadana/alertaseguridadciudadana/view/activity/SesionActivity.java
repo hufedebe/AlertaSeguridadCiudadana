@@ -47,7 +47,7 @@ public class SesionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sesion);
 
-
+        ConsultarActivity.tipo=0;
 
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);

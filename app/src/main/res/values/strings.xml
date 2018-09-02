@@ -22,6 +22,12 @@
 
     </string-array>
 
+    <string-array name="incidentes_type">
+        <item>Bienestar</item>
+        <item>Seguridad</item>
+        <item>Alerta Rápida</item>
+        <item>Todos</item>
+    </string-array>
 
     <string name="titlulo_pickers">Obtener fecha y hora</string>
 

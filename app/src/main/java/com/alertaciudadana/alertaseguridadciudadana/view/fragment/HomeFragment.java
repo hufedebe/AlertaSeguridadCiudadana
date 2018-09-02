@@ -25,14 +25,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alertaciudadana.alertaseguridadciudadana.R;
 import com.alertaciudadana.alertaseguridadciudadana.view.activity.BienestarActivity;
+import com.alertaciudadana.alertaseguridadciudadana.view.activity.ConsultarActivity;
 import com.alertaciudadana.alertaseguridadciudadana.view.activity.IncidenteActivity;
 import com.alertaciudadana.alertaseguridadciudadana.view.activity.LoginActivity;
 import com.alertaciudadana.alertaseguridadciudadana.view.activity.MainActivity;
+import com.alertaciudadana.alertaseguridadciudadana.view.activity.PrincipalActivity;
 import com.alertaciudadana.alertaseguridadciudadana.view.activity.RegistroActivity;
 import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -86,6 +89,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     View mView;
     private Button btn_registrar;
     private Button btn_alertaRapida;
+    private Button btn_consultarAlerta;
 
     public HomeFragment() {
 
@@ -114,6 +118,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         txt_fecha = bottomSheet.findViewById(R.id.txt_fecha);
         txt_hora = bottomSheet.findViewById(R.id.txt_hora);
 
+
+
+
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setPeekHeight(300);
         bottomSheetBehavior.setHideable(true);
@@ -122,13 +129,34 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         if (mMapView != null) {
             mMapView.onCreate(null);
             mMapView.onResume();
+
             mMapView.getMapAsync(this);
+            View locationButton = ((View) mMapView.getRootView().findViewById(Integer.parseInt("1")).
+                    getParent()).findViewById(Integer.parseInt("2"));
+            RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+            rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+            rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            rlp.setMargins(0, 0, 30, 500);
         }
 
-       
+
+
+
+        if(PrincipalActivity.alerta){
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    enviarAlerta();
+                }
+            }, 1000);
+
+
+        }
         //Obtener botones
         btn_registrar = getView().findViewById(R.id.btn_registrar);
         btn_alertaRapida = getView().findViewById(R.id.btn_alertaRapida);
+        btn_consultarAlerta= getView().findViewById(R.id.btn_consultarAlerta);
 
 
         btn_registrar.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +167,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 startActivity(iRegistro);
             }
         });
+
+        btn_consultarAlerta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Test", "Entrando");
+                Intent iCOnsulta = new Intent(getActivity(), ConsultarActivity.class);
+                startActivity(iCOnsulta);
+            }
+        });
+
+
 
         btn_alertaRapida.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,8 +220,39 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    private void enviarAlerta() {
+        if (userLocation != null) {
+            mGoogleMap.addMarker(new MarkerOptions().position(userLocation)
+                    .title("Alerta")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
+            PrincipalActivity.alerta=false;
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i_alerta = new Intent(getActivity(), IncidenteActivity.class);
+                    i_alerta.putExtra("INCIDENTE", "otro");
+                    i_alerta.putExtra("TIPO", "A");
+                    i_alerta.putExtra("LATITUD", String.valueOf(userLocation.latitude));
+                    i_alerta.putExtra("LONGITUD", String.valueOf(userLocation.longitude));
+                    startActivity(i_alerta);
+                }
+            }, 1000);
+
+        } else {
+            Log.i("Test", "Entrando");
+            Intent iRegistro = new Intent(getActivity(), MainActivity.class);
+            startActivity(iRegistro);
+                    /*
+                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()))
+                            .title("Alerta")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
+                            */
+        }
 
 
+
+    }
 
 
     @SuppressLint("MissingPermission")
@@ -263,22 +333,47 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         Log.d("Hugo", String.valueOf(markerList.size()));
         for(IncidenteModel incidenteModel: markerList){
 
+
+
+
             if(incidenteModel.getTipo()!=null){
 
-                if(incidenteModel.getTipo().equals("S")){
-                    LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
-                    mGoogleMap.addMarker(new MarkerOptions().position(position)
-                            .title(incidenteModel.getId()));
-                }else if(incidenteModel.getTipo().equals("B")){
-                    LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
-                    mGoogleMap.addMarker(new MarkerOptions().position(position)
-                            .title(incidenteModel.getId()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                }else if(incidenteModel.getTipo().equals("A")){
-                    LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
-                    mGoogleMap.addMarker(new MarkerOptions().position(position)
-                            .title(incidenteModel.getId()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
+                if(ConsultarActivity.tipo==0){
+                    if(incidenteModel.getTipo().equals("S")){
+                               LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
+                        mGoogleMap.addMarker(new MarkerOptions().position(position)
+                                .title(incidenteModel.getId()));
+                    }else if(incidenteModel.getTipo().equals("B")){
+                        LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
+                        mGoogleMap.addMarker(new MarkerOptions().position(position)
+                                .title(incidenteModel.getId()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    }else if(incidenteModel.getTipo().equals("A")){
+                        LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
+                        mGoogleMap.addMarker(new MarkerOptions().position(position)
+                                .title(incidenteModel.getId()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
 
+                    }
+                }else if(ConsultarActivity.tipo==1){
+                    if(incidenteModel.getTipo().equals("B")){
+                        LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
+                        mGoogleMap.addMarker(new MarkerOptions().position(position)
+                                .title(incidenteModel.getId()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    }
+                }else if(ConsultarActivity.tipo==2){
+                    if(incidenteModel.getTipo().equals("S")){
+                        LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
+                        mGoogleMap.addMarker(new MarkerOptions().position(position)
+                                .title(incidenteModel.getId()));
+                    }
+                }else if(ConsultarActivity.tipo==3){
+                    if(incidenteModel.getTipo().equals("A")){
+                        LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
+                        mGoogleMap.addMarker(new MarkerOptions().position(position)
+                                .title(incidenteModel.getId()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
+
+                    }
                 }
+
             }
 
         }

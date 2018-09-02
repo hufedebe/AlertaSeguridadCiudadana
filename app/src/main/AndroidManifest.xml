@@ -57,8 +57,11 @@
         <activity
             android:name=".view.activity.SesionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.PrincipalActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name=".view.activity.PrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.activity.ConsultarActivity"
+            android:theme="@style/MyDialogTheme"
             ></activity>
     </application>
 
