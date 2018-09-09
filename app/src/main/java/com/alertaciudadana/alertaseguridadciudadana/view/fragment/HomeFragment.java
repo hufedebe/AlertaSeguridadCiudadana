@@ -183,11 +183,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
 
+
+                userLocation= new LatLng(getLastKnownLocation().getLatitude(),getLastKnownLocation().getLongitude());
+
+
                 if (userLocation != null) {
                     mGoogleMap.addMarker(new MarkerOptions().position(userLocation)
                             .title("Alerta")
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
-
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -202,14 +205,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     }, 1000);
 
                 } else {
-                    Log.i("Test", "Entrando");
+                    Toast.makeText(getContext(),"Localizandolo", Toast.LENGTH_SHORT).show();
                     Intent iRegistro = new Intent(getActivity(), MainActivity.class);
                     startActivity(iRegistro);
-                    /*
-                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()))
-                            .title("Alerta")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
-                            */
                 }
 
 
@@ -220,7 +218,33 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    private Location getLastKnownLocation() {
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            @SuppressLint("MissingPermission") Location l = locationManager.getLastKnownLocation(provider);
+
+
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null
+                    || l.getAccuracy() < bestLocation.getAccuracy()) {
+
+                bestLocation = l;
+            }
+        }
+        if (bestLocation == null) {
+            return null;
+        }
+        return bestLocation;
+    }
+
+
+
     private void enviarAlerta() {
+
+        userLocation= new LatLng(getLastKnownLocation().getLatitude(),getLastKnownLocation().getLongitude());
         if (userLocation != null) {
             mGoogleMap.addMarker(new MarkerOptions().position(userLocation)
                     .title("Alerta")
@@ -243,11 +267,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             Log.i("Test", "Entrando");
             Intent iRegistro = new Intent(getActivity(), MainActivity.class);
             startActivity(iRegistro);
-                    /*
-                    mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()))
-                            .title("Alerta")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_alerta_user)));
-                            */
+
         }
 
 
@@ -423,16 +443,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
         Log.d("Hugo","Entrando");
-        /**
-        markerList = LoginActivity.listIncidentes;
-        Log.d("Hugo", String.valueOf(markerList.size()));
-        for(IncidenteModel incidenteModel: markerList){
 
-            LatLng position = new LatLng(Float.parseFloat(incidenteModel.getLatitude()),Float.parseFloat(incidenteModel.getLongitud()));
-            mGoogleMap.addMarker(new MarkerOptions().position(position)
-                    .title(incidenteModel.getSubtipo().toString()));
-        }
-         */
 
     }
 
@@ -449,4 +460,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         incidente.setText(currentMarker.getSubtipo());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
+
+
 }

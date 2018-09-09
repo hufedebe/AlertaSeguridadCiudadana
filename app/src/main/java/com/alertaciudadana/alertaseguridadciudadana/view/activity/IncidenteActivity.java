@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -96,6 +97,21 @@ public class IncidenteActivity extends AppCompatActivity  {
 
 
 
+
+
+        btn_ubicacion = findViewById(R.id.btn_ubicacion);
+        btn_camera = findViewById(R.id.btn_camara);
+        btn_registrar = findViewById(R.id.btn_registrar);
+        editText_Incidente=findViewById(R.id.editText_Incidente);
+        editText_Descripcion=findViewById(R.id.editText_Descripcion);
+        editText_Incidente=findViewById(R.id.editText_Incidente);
+        editText_Numero=findViewById(R.id.editText_Numero);
+        editText_Correo=findViewById(R.id.editText_Correo);
+        editText_Hora=findViewById(R.id.editText_Hora);
+        date = findViewById(R.id.date);
+
+
+
         TextWatcher tw = new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
@@ -157,17 +173,6 @@ public class IncidenteActivity extends AppCompatActivity  {
 
             }
         };
-
-        btn_ubicacion = findViewById(R.id.btn_ubicacion);
-        btn_camera = findViewById(R.id.btn_camara);
-        btn_registrar = findViewById(R.id.btn_registrar);
-        editText_Incidente=findViewById(R.id.editText_Incidente);
-        editText_Descripcion=findViewById(R.id.editText_Descripcion);
-        editText_Incidente=findViewById(R.id.editText_Incidente);
-        editText_Numero=findViewById(R.id.editText_Numero);
-        editText_Correo=findViewById(R.id.editText_Correo);
-        editText_Hora=findViewById(R.id.editText_Hora);
-        date = findViewById(R.id.date);
         date.addTextChangedListener(tw);
         txt_time= findViewById(R.id.txt_time);
         layout_correo = findViewById(R.id.layout_correo);
@@ -178,7 +183,6 @@ public class IncidenteActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 obtenerHora();
-
             }
         });
 
@@ -243,8 +247,6 @@ public class IncidenteActivity extends AppCompatActivity  {
                 i_ubicacion.putExtra("CORREO",editText_Correo.getText().toString());
                 i_ubicacion.putExtra("FECHA",date.getText().toString());
                 i_ubicacion.putExtra("HORA",txt_time.getText().toString());
-
-
                 startActivity(i_ubicacion);
 
             }
@@ -267,15 +269,60 @@ public class IncidenteActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
+            if(!tipo.equals("A")){
+
+                if(TextUtils.isEmpty(editText_Descripcion.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Por favor Ingrese una descripción", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(editText_Numero.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Por favor Ingrese Número de Contacto", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(editText_Correo.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Por favor Ingrese Correo de Contacto", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(date.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"Por favor Ingrese Una Fecha", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(txt_time.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Por favor La Hora del Incidente", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(latitud)) {
+                    Toast.makeText(getApplicationContext(), "Ingrese Ubicación del Incidente", Toast.LENGTH_LONG).show();
+
+                }else{
+
+                    int index =  LoginActivity.listIncidentes.size()+1;
+                    IncidenteModel incidenteModel = new IncidenteModel();
+                    incidenteModel.setId(Integer.toString(index));
+                    incidenteModel.setSubtipo(editText_Incidente.getText().toString());
+                    incidenteModel.setDescripcion(editText_Descripcion.getText().toString());
+                    incidenteModel.setNumero(editText_Numero.getText().toString());
+                    incidenteModel.setCorreo(editText_Correo.getText().toString());
+                    incidenteModel.setFecha(date.getText().toString());
+                    incidenteModel.setHora(txt_time.getText().toString());
+
+                    if(tipo.equals("A")){
+                        incidenteModel.setLatitude(latitud);
+                        incidenteModel.setLongitud(longitud);
+                    }else{
+                        incidenteModel.setLatitude(latitud);
+                        incidenteModel.setLongitud(longitud);
+                    }
+
+                    incidenteModel.setTipo(tipo);
+                    LoginActivity.listIncidentes.add(incidenteModel);
+                    Intent i_principal = new Intent(IncidenteActivity.this,MainActivity.class);
+                    i_principal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i_principal);
+                }
+
+
+            }else{
                 int index =  LoginActivity.listIncidentes.size()+1;
                 IncidenteModel incidenteModel = new IncidenteModel();
                 incidenteModel.setId(Integer.toString(index));
                 incidenteModel.setSubtipo(editText_Incidente.getText().toString());
                 incidenteModel.setDescripcion(editText_Descripcion.getText().toString());
                 incidenteModel.setNumero(editText_Numero.getText().toString());
-                incidenteModel.setCorreo(editText_Numero.getText().toString());
+                incidenteModel.setCorreo(editText_Correo.getText().toString());
                 incidenteModel.setFecha(date.getText().toString());
                 incidenteModel.setHora(txt_time.getText().toString());
+
                 if(tipo.equals("A")){
                     incidenteModel.setLatitude(latitud);
                     incidenteModel.setLongitud(longitud);
@@ -286,11 +333,14 @@ public class IncidenteActivity extends AppCompatActivity  {
 
                 incidenteModel.setTipo(tipo);
                 LoginActivity.listIncidentes.add(incidenteModel);
-                Log.d("Hugo", String.valueOf(LoginActivity.listIncidentes.size()));
-                Log.d("Hugo", String.valueOf(incidenteModel.getLatitude()));
-                Log.d("Hugo", String.valueOf(incidenteModel.getLongitud()));
+
                 Intent i_principal = new Intent(IncidenteActivity.this,MainActivity.class);
+                i_principal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i_principal);
+
+
+            }
+
             }
         });
     }
@@ -386,16 +436,32 @@ public class IncidenteActivity extends AppCompatActivity  {
 
                         startActivityForResult(intent,
                                 CAMERA_REQUEST);
-                                */
+                       */
+                       /*
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        }*/
                         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                         }
+
+
+
                     }
                 });
         myAlertDialog.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            //Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Log.i("Hugo",extras.toString());
+        }
+    }
     /*
 
     @Override
