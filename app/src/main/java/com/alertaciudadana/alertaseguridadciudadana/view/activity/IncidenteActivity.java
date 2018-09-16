@@ -32,9 +32,14 @@ import android.widget.Toast;
 import com.alertaciudadana.alertaseguridadciudadana.R;
 import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -64,6 +69,7 @@ public class IncidenteActivity extends AppCompatActivity  {
 
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_GALLERY_CAPTURE =2;
 
 
     private static final String CERO = "0";
@@ -414,12 +420,13 @@ public class IncidenteActivity extends AppCompatActivity  {
                     public void onClick(DialogInterface arg0, int arg1) {
                         Intent pictureActionIntent = null;
 
-                        pictureActionIntent = new Intent(
-                                Intent.ACTION_PICK,
+
+
+
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(
-                                pictureActionIntent,
-                                GALLERY_PICTURE);
+                        startActivityForResult(pickPhoto , REQUEST_GALLERY_CAPTURE);//one can be replaced with any action code
+
 
                     }
                 });
@@ -446,169 +453,20 @@ public class IncidenteActivity extends AppCompatActivity  {
             imageBitmap = (Bitmap) extras.get("data");
             btn_camera.setImageBitmap(imageBitmap);
 
-
-
-        }
-    }
-    /*
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        bitmap = null;
-        selectedImagePath = null;
-
-        if (resultCode == RESULT_OK && requestCode == CAMERA_REQUEST) {
-
-            File f = new File(Environment.getExternalStorageDirectory()
-                    .toString());
-            for (File temp : f.listFiles()) {
-                if (temp.getName().equals("temp.jpg")) {
-                    f = temp;
-                    break;
-                }
-            }
-
-            if (!f.exists()) {
-
-                Toast.makeText(getBaseContext(),
-
-                        "Error capturando la foto", Toast.LENGTH_LONG)
-
-                        .show();
-
-                return;
-
-            }
-
+        } else if(requestCode == REQUEST_GALLERY_CAPTURE&& resultCode == RESULT_OK ){
+            Bundle extras = data.getExtras();
+            Uri selectedImage = data.getData();
+            //imageview.setImageURI(selectedImage);
+            //imageBitmap = (Bitmap) extras.get("data");
             try {
-
-                bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
-
-                bitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, true);
-
-                int rotate = 0;
-                try {
-                    ExifInterface exif = new ExifInterface(f.getAbsolutePath());
-                    int orientation = exif.getAttributeInt(
-                            ExifInterface.TAG_ORIENTATION,
-                            ExifInterface.ORIENTATION_NORMAL);
-
-                    switch (orientation) {
-                        case ExifInterface.ORIENTATION_ROTATE_270:
-                            rotate = 270;
-                            break;
-                        case ExifInterface.ORIENTATION_ROTATE_180:
-                            rotate = 180;
-                            break;
-                        case ExifInterface.ORIENTATION_ROTATE_90:
-                            rotate = 90;
-                            break;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Matrix matrix = new Matrix();
-                matrix.postRotate(rotate);
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                        bitmap.getHeight(), matrix, true);
-
-
-
-                img_logo.setImageBitmap(bitmap);
-                //storeImageTosdCard(bitmap);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
+                imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        } else if (resultCode == RESULT_OK && requestCode == GALLERY_PICTURE) {
-            if (data != null) {
-
-                Uri selectedImage = data.getData();
-                String[] filePath = { MediaStore.Images.Media.DATA };
-                Cursor c = getContentResolver().query(selectedImage, filePath,
-                        null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePath[0]);
-                selectedImagePath = c.getString(columnIndex);
-                c.close();
-
-                if (selectedImagePath != null) {
-                    //txt_image_path.setText(selectedImagePath);
-                }
-
-                bitmap = BitmapFactory.decodeFile(selectedImagePath); // load
-                // preview image
-                bitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, false);
-
-
-
-                img_logo.setImageBitmap(bitmap);
-
-            } else {
-                Toast.makeText(getApplicationContext(), "Cancelled",
-                        Toast.LENGTH_SHORT).show();
-            }
+            btn_camera.setImageURI(selectedImage);
+            btn_camera.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
-
     }
 
-*/
-    private void storeImageTosdCard(Bitmap processedBitmap) {
-        try {
-            // TODO Auto-generated method stub
 
-            OutputStream output;
-            // Find the SD Card path
-            File filepath = Environment.getExternalStorageDirectory();
-            // Create a new folder in SD Card
-            File dir = new File(filepath.getAbsolutePath() + "/appName/");
-            dir.mkdirs();
-
-            String imge_name = "appName" + System.currentTimeMillis()
-                    + ".jpg";
-            // Create a name for the saved image
-            File file = new File(dir, imge_name);
-            if (file.exists()) {
-                file.delete();
-                file.createNewFile();
-            } else {
-                file.createNewFile();
-
-            }
-
-            try {
-
-                output = new FileOutputStream(file);
-
-                // Compress into png format image from 0% - 100%
-                processedBitmap
-                        .compress(Bitmap.CompressFormat.PNG, 100, output);
-                output.flush();
-                output.close();
-
-                int file_size = Integer
-                        .parseInt(String.valueOf(file.length() / 1024));
-                System.out.println("size ===>>> " + file_size);
-                System.out.println("file.length() ===>>> " + file.length());
-
-                selectedImagePath = file.getAbsolutePath();
-
-
-
-            }
-
-            catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-    }
 }
