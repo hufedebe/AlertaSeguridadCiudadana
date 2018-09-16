@@ -57,17 +57,37 @@ public class ConsultarActivity extends AppCompatActivity implements
                 return 1;
             }else if(sp2.contentEquals("Basura en vía pública")){
                 return 2;
-            }else if (sp2.contentEquals("Accidentes")){
-                return 3;
             }else if (sp2.contentEquals("Construcción Ilegal")){
-                return 4;
+                return 3;
             }else if (sp2.contentEquals("Problemas Viales")){
-                return 5;
+                return 4;
             }else if (sp2.contentEquals("Ruidos Molestos")){
-                return 6;
+                return 5;
             }else{
                return 0;
             }
+        }else if(sp2.contentEquals("Seguridad")){
+            if(sp2.contentEquals("Acoso")){
+                return 1;
+            }else if(sp2.contentEquals("Extraviado")){
+                return 2;
+            }else if (sp2.contentEquals("Peleas")){
+                return 3;
+            }else if (sp2.contentEquals("Robo")){
+                return 4;
+            }else if (sp2.contentEquals("Vandalismo")){
+                return 5;
+            }else if (sp2.contentEquals("Venta Drogas")){
+                return 6;
+            } else if (sp2.contentEquals("Violencia Familiar")){
+                return 7;
+            }else{
+                return 0;
+            }
+
+
+
+
         }
         return 0;
     }
@@ -78,7 +98,11 @@ public class ConsultarActivity extends AppCompatActivity implements
             return 1;
         }else if(sp1.contentEquals("Seguridad")){
             return 2;
-        }else{
+        }else if(sp1.contentEquals("Alerta Rápida")){
+            return 3;
+        }
+
+        else{
             return 0;
         }
 

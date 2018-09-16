@@ -58,6 +58,7 @@ public class IncidenteActivity extends AppCompatActivity  {
     EditText editText_Hora;
     TextView txt_time;
     LinearLayout layout_correo, layout_numero;
+    Bitmap imageBitmap;
 
 
 
@@ -86,7 +87,7 @@ public class IncidenteActivity extends AppCompatActivity  {
         final String latitud  = getIntent().getStringExtra("LATITUD");
         final String longitud = getIntent().getStringExtra("LONGITUD");
         final String tipo = getIntent().getStringExtra("TIPO");
-
+        final Integer idSubtipo = getIntent().getIntExtra("IDSUBTIPO",0);
 
         //DATOS DE LA PANTALLA
         final String descripcion= getIntent().getStringExtra("DESCRIPCION");
@@ -247,6 +248,7 @@ public class IncidenteActivity extends AppCompatActivity  {
                 i_ubicacion.putExtra("CORREO",editText_Correo.getText().toString());
                 i_ubicacion.putExtra("FECHA",date.getText().toString());
                 i_ubicacion.putExtra("HORA",txt_time.getText().toString());
+                i_ubicacion.putExtra("IDSUBTIPO",idSubtipo);
                 startActivity(i_ubicacion);
 
             }
@@ -256,12 +258,7 @@ public class IncidenteActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 startDialog();
-                /*
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-                */
+
             }
         });
 
@@ -295,6 +292,8 @@ public class IncidenteActivity extends AppCompatActivity  {
                     incidenteModel.setCorreo(editText_Correo.getText().toString());
                     incidenteModel.setFecha(date.getText().toString());
                     incidenteModel.setHora(txt_time.getText().toString());
+                    incidenteModel.setImg_incidente(imageBitmap);
+                    incidenteModel.setId_subtipo(idSubtipo);
 
                     if(tipo.equals("A")){
                         incidenteModel.setLatitude(latitud);
@@ -322,6 +321,9 @@ public class IncidenteActivity extends AppCompatActivity  {
                 incidenteModel.setCorreo(editText_Correo.getText().toString());
                 incidenteModel.setFecha(date.getText().toString());
                 incidenteModel.setHora(txt_time.getText().toString());
+                incidenteModel.setImg_incidente(imageBitmap);
+                incidenteModel.setId_subtipo(idSubtipo);
+
 
                 if(tipo.equals("A")){
                     incidenteModel.setLatitude(latitud);
@@ -426,28 +428,11 @@ public class IncidenteActivity extends AppCompatActivity  {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        /*
-                        Intent intent = new Intent(
-                                MediaStore.ACTION_IMAGE_CAPTURE);
-                        File f = new File(android.os.Environment
-                                .getExternalStorageDirectory(), "temp.jpg");
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                                Uri.fromFile(f));
 
-                        startActivityForResult(intent,
-                                CAMERA_REQUEST);
-                       */
-                       /*
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                        }*/
                         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                         }
-
-
 
                     }
                 });
@@ -458,8 +443,11 @@ public class IncidenteActivity extends AppCompatActivity  {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            //Bitmap imageBitmap = (Bitmap) extras.get("data");
-            Log.i("Hugo",extras.toString());
+            imageBitmap = (Bitmap) extras.get("data");
+            btn_camera.setImageBitmap(imageBitmap);
+
+
+
         }
     }
     /*

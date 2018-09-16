@@ -46,6 +46,7 @@ public class UbicacionActivity extends AppCompatActivity implements OnMapReadyCa
 
         final String incidente= getIntent().getStringExtra("INCIDENTE");
         final String tipo = getIntent().getStringExtra("TIPO");
+        final Integer idSubtipo = getIntent().getIntExtra("IDSUBTIPO",0);
 
 
 
@@ -73,6 +74,9 @@ public class UbicacionActivity extends AppCompatActivity implements OnMapReadyCa
                 i_registro.putExtra("LATITUD", String.valueOf(latlngcentro.latitude));
                 i_registro.putExtra("LONGITUD",String.valueOf(latlngcentro.longitude));
                 i_registro.putExtra("TIPO",tipo);
+                i_registro.putExtra("IDSUBTIPO",idSubtipo);
+
+
 
                 i_registro.putExtra("DESCRIPCION",descripcion);
                 i_registro.putExtra("NUMERO",numero);
