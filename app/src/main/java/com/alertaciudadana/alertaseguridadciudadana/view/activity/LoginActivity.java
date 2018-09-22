@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btn_login;
+    Button btn_login, btn_registro;
     public static List<IncidenteModel> listIncidentes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
         listIncidentes = new ArrayList<>();
         btn_login = findViewById(R.id.btn_login);
+        btn_registro = findViewById(R.id.btn_registro);
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -33,5 +34,16 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        btn_registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i_registro = new Intent(LoginActivity.this,RegistroUsuarioActivity.class);
+                startActivity(i_registro);
+            }
+        });
+
+
+
     }
 }

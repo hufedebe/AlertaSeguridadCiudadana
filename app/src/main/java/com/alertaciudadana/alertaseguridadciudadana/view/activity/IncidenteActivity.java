@@ -30,6 +30,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alertaciudadana.alertaseguridadciudadana.R;
+import com.alertaciudadana.alertaseguridadciudadana.data.entity.IncidentePost;
+import com.alertaciudadana.alertaseguridadciudadana.data.entity.IncidenteResponse;
+import com.alertaciudadana.alertaseguridadciudadana.data.net.ApiAdapter;
 import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
 
 import java.io.BufferedInputStream;
@@ -42,6 +45,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class IncidenteActivity extends AppCompatActivity  {
 
@@ -289,6 +296,26 @@ public class IncidenteActivity extends AppCompatActivity  {
 
                 }else{
 
+                    IncidentePost incidentePost = new IncidentePost();
+                    incidentePost.setTipo(tipo);
+                    incidentePost.setSubTipo(idSubtipo);
+                    incidentePost.setNombreIncidente(editText_Incidente.getText().toString());
+                    incidentePost.setDescripcion(editText_Descripcion.getText().toString());
+                    incidentePost.setCelular(editText_Numero.getText().toString());
+                    incidentePost.setEmail(editText_Correo.getText().toString());
+                    incidentePost.setFecha(date.getText().toString());
+                    incidentePost.setHora(txt_time.getText().toString());
+                    //incidentePost.setFoto(imageBitmap);
+                    incidentePost.setLatitud(Double.valueOf(latitud));
+                    incidentePost.setLongitud(Double.valueOf(longitud));
+
+                    Call<IncidenteResponse> call = ApiAdapter.getApiService().postIncidente(incidentePost);
+                    call.enqueue(new IncidenteCallback());
+
+
+
+
+                    /*
                     int index =  LoginActivity.listIncidentes.size()+1;
                     IncidenteModel incidenteModel = new IncidenteModel();
                     incidenteModel.setId(Integer.toString(index));
@@ -314,10 +341,34 @@ public class IncidenteActivity extends AppCompatActivity  {
                     Intent i_principal = new Intent(IncidenteActivity.this,MainActivity.class);
                     i_principal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i_principal);
+                    */
+
                 }
 
 
             }else{
+
+                IncidentePost incidentePost = new IncidentePost();
+                incidentePost.setTipo("A");
+                incidentePost.setSubTipo(0);
+                incidentePost.setNombreIncidente(editText_Incidente.getText().toString());
+                incidentePost.setDescripcion(editText_Descripcion.getText().toString());
+                incidentePost.setCelular(editText_Numero.getText().toString());
+                incidentePost.setEmail(editText_Correo.getText().toString());
+                incidentePost.setFecha(date.getText().toString());
+                incidentePost.setHora(txt_time.getText().toString());
+                //incidentePost.setFoto(imageBitmap);
+                incidentePost.setLatitud(Double.valueOf(latitud));
+                incidentePost.setLongitud(Double.valueOf(longitud));
+
+                Call<IncidenteResponse> call = ApiAdapter.getApiService().postIncidente(incidentePost);
+                call.enqueue(new IncidenteCallback());
+
+
+
+
+
+                /*
                 int index =  LoginActivity.listIncidentes.size()+1;
                 IncidenteModel incidenteModel = new IncidenteModel();
                 incidenteModel.setId(Integer.toString(index));
@@ -341,10 +392,14 @@ public class IncidenteActivity extends AppCompatActivity  {
 
                 incidenteModel.setTipo(tipo);
                 LoginActivity.listIncidentes.add(incidenteModel);
+                */
 
+                /*
                 Intent i_principal = new Intent(IncidenteActivity.this,MainActivity.class);
                 i_principal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i_principal);
+
+                */
 
 
             }
@@ -352,6 +407,53 @@ public class IncidenteActivity extends AppCompatActivity  {
             }
         });
     }
+
+
+    class IncidenteCallback implements Callback<IncidenteResponse>{
+
+        @Override
+        public void onResponse(Call<IncidenteResponse> call, Response<IncidenteResponse> response) {
+            if(response.isSuccessful()){
+                IncidenteResponse incidenteResponse = response.body();
+                if (!TextUtils.isEmpty(incidenteResponse.getId())){
+
+                    Toast.makeText(getApplicationContext(),"Se ha registrado el Incidente ", Toast.LENGTH_SHORT).show();
+                    Intent i_principal = new Intent(IncidenteActivity.this,MainActivity.class);
+                    i_principal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i_principal);
+
+                }else{
+
+                    // Log.i("Retrofit", "post submitted to API." + response.body().toString());
+                    try {
+                        Toast.makeText(getApplicationContext(),response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }else{
+
+                Toast.makeText(getApplicationContext(),"Problemas Conexion", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+
+        @Override
+        public void onFailure(Call<IncidenteResponse> call, Throwable t) {
+
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     private void obtenerHora() {
 

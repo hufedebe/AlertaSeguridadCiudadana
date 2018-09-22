@@ -55,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //Se obtiene fragment
         final Integer fragmentId = getIntent().getIntExtra("fragment",0);
-        Log.i("Hugo",fragmentId.toString());
+
 
         mMainFrame = findViewById(R.id.main_frame);
         mMainNav = findViewById(R.id.main_nav);
