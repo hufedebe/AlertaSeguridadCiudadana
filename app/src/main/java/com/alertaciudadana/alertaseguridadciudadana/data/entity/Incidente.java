@@ -43,6 +43,10 @@ public class Incidente {
     @Expose
     private String hora;
 
+    @SerializedName("foto")
+    @Expose
+    private String foto;
+
     @SerializedName("latitud")
     @Expose
     private Double latitud;
@@ -138,5 +142,13 @@ public class Incidente {
 
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

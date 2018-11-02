@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -20,6 +21,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -597,6 +599,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             incidenteModel.setTipo(incidenteEntity.getTipo());
             incidenteModel.setSubtipo(incidenteEntity.getNombreIncidente());
 
+            if(incidenteEntity.getFoto()!=null){
+                byte[] decodedBytes = Base64.decode(
+                        incidenteEntity.getFoto().substring(incidenteEntity.getFoto().indexOf(",")  + 1),
+                        Base64.DEFAULT
+                );
+
+
+              incidenteModel.setImg_incidente(BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length));
+            }
+
+
             incidenteModel.setDescripcion(incidenteEntity.getDescripcion());
             incidenteModel.setNumero(incidenteEntity.getCelular());
             incidenteModel.setCorreo(incidenteEntity.getEmail());
@@ -771,6 +784,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         txt_fecha.setText(currentMarker.getFecha());
         incidente.setText(currentMarker.getSubtipo());
         img_accidente.setImageBitmap(currentMarker.getImg_incidente());
+        img_accidente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 

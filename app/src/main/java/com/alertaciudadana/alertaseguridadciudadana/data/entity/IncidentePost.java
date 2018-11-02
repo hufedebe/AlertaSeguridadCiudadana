@@ -13,7 +13,7 @@ public class IncidentePost {
     private String email;
     private String fecha;
     private String hora;
-    private Buffer foto;
+    private String foto;
     private Double latitud;
     private Double longitud;
 
@@ -82,11 +82,11 @@ public class IncidentePost {
         this.hora = hora;
     }
 
-    public Buffer getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(Buffer foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

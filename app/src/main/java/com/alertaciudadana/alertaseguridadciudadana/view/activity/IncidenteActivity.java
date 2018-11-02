@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ import com.alertaciudadana.alertaseguridadciudadana.data.net.ApiAdapter;
 import com.alertaciudadana.alertaseguridadciudadana.view.model.IncidenteModel;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -305,6 +307,14 @@ public class IncidenteActivity extends AppCompatActivity  {
                     incidentePost.setEmail(editText_Correo.getText().toString());
                     incidentePost.setFecha(date.getText().toString());
                     incidentePost.setHora(txt_time.getText().toString());
+                    if(imageBitmap!=null){
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream .toByteArray();
+                        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                        incidentePost.setFoto(encoded);
+                    }
                     //incidentePost.setFoto(imageBitmap);
                     incidentePost.setLatitud(Double.valueOf(latitud));
                     incidentePost.setLongitud(Double.valueOf(longitud));
@@ -357,6 +367,16 @@ public class IncidenteActivity extends AppCompatActivity  {
                 incidentePost.setEmail(editText_Correo.getText().toString());
                 incidentePost.setFecha(date.getText().toString());
                 incidentePost.setHora(txt_time.getText().toString());
+
+                //if(imageBitmap!=null){
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream .toByteArray();
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                    incidentePost.setFoto(encoded);
+                //}
+
                 //incidentePost.setFoto(imageBitmap);
                 incidentePost.setLatitud(Double.valueOf(latitud));
                 incidentePost.setLongitud(Double.valueOf(longitud));

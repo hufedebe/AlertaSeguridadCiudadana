@@ -100,13 +100,7 @@ public class IncidenteModel {
     }
 
 
-    public Bitmap getImg_incidente() {
-        return img_incidente;
-    }
 
-    public void setImg_incidente(Bitmap img_incidente) {
-        this.img_incidente = img_incidente;
-    }
 
     public Integer getId_subtipo() {
         return id_subtipo;
@@ -114,5 +108,14 @@ public class IncidenteModel {
 
     public void setId_subtipo(Integer id_subtipo) {
         this.id_subtipo = id_subtipo;
+    }
+
+
+    public Bitmap getImg_incidente() {
+        return img_incidente;
+    }
+
+    public void setImg_incidente(Bitmap img_incidente) {
+        this.img_incidente = img_incidente;
     }
 }

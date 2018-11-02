@@ -25,8 +25,8 @@ public class ApiAdapter {
 
         httpClient.addInterceptor(logging);  // <-- this is the important line!
 
-
-        String baseUrl = "http://9fec1dab.ngrok.io/api/";
+        //url heroku
+        String baseUrl = "https://sleepy-river-53534.herokuapp.com/api/";
         //String baseUrl = "http://10.0.2.2:9090/AtencionVehicular/";
         if (API_SERVICE==null){
 
