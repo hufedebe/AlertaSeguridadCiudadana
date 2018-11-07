@@ -339,8 +339,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 if(locationManager!=null){
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
                     lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if(lastKnownLocation!=null){
+                        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude()),16));
+                    }
 
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude()),16));
                 }
 
 
